@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prediction Results</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Prediction for {{ company }} - {{ feature.title() }}</h1>
+
+        <div id="chart1"></div>
+        <div id="chart2"></div>
+        <div id="chart3"></div>
+
+        <script>
+            let result = JSON.parse(`{{ result | safe }}`);
+
+            // Actual vs Predicted
+            Plotly.newPlot('chart1', [
+                { x: result.dates, y: result.actual, mode: 'lines', name: 'Actual' },
+                { x: result.dates, y: result.predicted, mode: 'lines', name: 'Predicted' }
+            ], { title: 'Actual vs Predicted' });
+
+            // Moving Average
+            Plotly.newPlot('chart2', [
+                { x: result.full_dates.slice(49), y: result.ma50, mode: 'lines', name: '50-Day Moving Average' }
+            ], { title: '50-Day Moving Average' });
+
+            // Volatility
+            Plotly.newPlot('chart3', [
+                { x: result.full_dates.slice(49), y: result.volatility, mode: 'lines', name: 'Volatility (STD DEV)' }
+            ], { title: 'Price Volatility' });
+        </script>
+    </div>
+</body>
+</html>

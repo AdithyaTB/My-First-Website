@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stock Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.25);
+            width: 400px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        select, button {
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            border: none;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>📈 Stock Prediction App</h1>
+        <form action="/predict" method="POST">
+            
+            <label for="company">Choose Company:</label>
+            <select name="company" required>
+                <option value="AAPL">Apple (AAPL)</option>
+                <option value="GOOG">Google (GOOG)</option>
+                <option value="MSFT">Microsoft (MSFT)</option>
+                <option value="AMZN">Amazon (AMZN)</option>
+                <option value="FB">Facebook (FB)</option>
+            </select>
+
+            <label for="feature">Choose Feature:</label>
+            <select name="feature" required>
+                <option value="close">Close Price</option>
+                <option value="open">Open Price</option>
+                <option value="high">High Price</option>
+                <option value="low">Low Price</option>
+                <option value="volume">Volume</option>
+            </select>
+
+            <button type="submit">🔮 Predict</button>
+        </form>
+    </div>
+
+</body>
+</html>
